@@ -1,0 +1,23 @@
+# Antigravity Workspace Rules — Skill Agent
+
+Follow `.agents/skills/skill-agent/SKILL.md` (or `.claude/skills/skill-agent/SKILL.md` / `./SKILL.md`) and respect `config.yaml`.
+
+## MANDATORY STEP 0: MODEL INVENTORY & UNIFIED 3-STAGE GATE
+1. **First-Run Model & Thinking Lock**: If `.ai-memory/RULES_LOCK.md` has no `Locked Model Inventory` for **Antigravity** (and `config.yaml` `available_models` is `"auto"`), ask ONCE for a screenshot/text of available models + thinking levels (`Off`/`Low`/`Medium`/`High`) in **Antigravity**, lock it in `RULES_LOCK.md`, and never advise models outside that list.
+2. **Zero-Bloat Brainstorming (Auto on Discussion)**: On ideation/questions, stay strictly **read-only** (zero edits, zero unsolicited repo reads), reply in Telegraphic format (`<=15 lines`: options + trade-offs + 1 pick). When user says to implement -> save agreed spec to `CURRENT_STATE.md` and run Step 0 Pre-Flight Check below.
+3. **Resume / Bypass**: Execute immediately ONLY if (a) user sends `gas`/`lanjut`/`lanjutkan`/`ubah kode`/`udah diubah`/`tetap jalan`/`continue`/`go` with `Status: WAITING_MODEL_SWITCH`, OR (b) `/fast` / `skip check` / `langsung gas`, OR (c) pure read-only Q&A.
+4. **Hard Stop Pre-Flight Advisory**: Otherwise, BEFORE touching code or running commands, save task to `.ai-memory/CURRENT_STATE.md` (`WAITING_MODEL_SWITCH`) and reply ONLY with:
+
+**Pre-Flight Check**
+- **Engine**: Antigravity *(active: [Active Model if visible, else "check selector"])*
+- **Plan**: [1-line distilled goal <=14 words]
+- **Task Tier**: **[RINGAN / SEDANG / BERAT]** — [reason <=8 words]
+- **Recommended Model**: **[Exact Model from Locked Inventory]**
+- **Thinking Effort**: **[Off / Low / Medium / High]** *(auto-boost adapts if using another model)*
+
+Switch model/thinking if needed (or keep current), then reply **`gas`** / **`lanjutkan`** to run end-to-end.
+
+## AUTONOMOUS EXECUTION PIPELINE (AFTER `gas`)
+1. **Boot & Guards (`01`, `03`, `04`, `08`)**: Parallel-read `CURRENT_STATE.md`, `RULES_LOCK.md`, `MISTAKES.md`, `CODEBASE_MAP.md`. Never inspect ignored paths (`node_modules`, `.git`, `*.lock`, `.env*`) without explicit user consent.
+2. **Route Cleanly**: Non-Web -> `06`; Web/UI -> `05`+`07`; Bug -> `09`; Arch -> `10`; Security -> `11`; Copy -> `12`; DevOps -> `13`; Research -> `14`; Automation/Prompts -> `15`; Data/Decisions -> `16`; Synthesis -> `17`.
+3. **Finish, Verify & Log (`02`, `03`, `18`)**: Work continuously end-to-end (fail-fast `CI=true` checks + silent Quality Gate `18`); never stop for trivial confirms. Append 1 line to bottom of `.ai-memory/TRACK_RECORD.md` (never delete history) and refresh `CURRENT_STATE.md` + `CODEBASE_MAP.md`.

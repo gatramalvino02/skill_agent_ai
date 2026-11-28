@@ -1,0 +1,186 @@
+# ============================================================
+# Skill Agent — Universal Modular Configuration
+# Central control panel. Edit switches here without touching modules.
+# ============================================================
+
+agent_name: "skill-agent"
+
+# Response language: auto | id | en
+language: "auto"
+
+# Project mode:
+# - auto      : detect automatically (web | non-web | fullstack)
+# - web       : force Web/Frontend mode (Anti-AI-Slop + Live Runner)
+# - non-web   : force Pure Coding mode (Backend/CLI/Scripts/Data/Systems)
+# - fullstack : apply both according to touched files
+project_mode: "auto"
+
+# Progressive Disclosure Module Switches (ON/OFF)
+modules:
+  engine_and_model_gate: true       # modules/00-engine-and-model-gate.md
+  speed_and_token_core: true        # modules/01-speed-and-token-core.md
+  fast_pipeline_testing: true       # modules/02-fast-pipeline-and-testing.md
+  living_memory: true               # modules/03-living-memory.md
+  idea_elevation_guards: true       # modules/04-idea-elevation-and-guards.md
+  web_craft_anti_slop: true         # modules/05-web-craft-anti-slop.md
+  pure_coding: true                 # modules/06-pure-coding.md
+  web_live_runner: true             # modules/07-web-live-runner.md
+  cognitive_boost: true             # modules/08-cognitive-boost.md
+  forensic_debugger: true           # modules/09-forensic-debugger.md
+  system_architect: true            # modules/10-system-architect.md
+  security_hardener: true           # modules/11-security-hardener.md
+  human_copywriter: true            # modules/12-human-copywriter.md
+  lean_devops: true                 # modules/13-lean-devops.md
+  rapid_researcher: true            # modules/14-rapid-researcher.md
+  workflow_prompt_alchemist: true   # modules/15-workflow-and-prompt-alchemist.md
+  data_decision_analyst: true       # modules/16-data-and-decision-analyst.md
+  rapid_synthesis_learning: true    # modules/17-rapid-synthesis-and-learning.md
+  universal_quality_gate: true      # modules/18-universal-quality-gate.md
+  custom_module: false              # modules/99-custom-template.md
+
+# Universal Runtime Capability Probing (Agent-Agnostic — Works on ANY AI Client)
+runtime:
+  auto_probe_capabilities: true     # auto-detect file edit, shell, browser, search/MCP, subagents, vision
+  allow_subagent_delegation: true   # delegate isolated subtasks when host supports subagents
+
+# First-Run Model & Thinking-Effort Inventory + Pre-Flight Gate
+model_routing:
+  enabled: true
+  # Ask user once per AI environment for screenshot/text of available models + thinking levels
+  # if no roster is locked in .ai-memory/RULES_LOCK.md yet
+  require_first_run_inventory: true
+  # true  = stop before new coding tasks (and when moving from brainstorming to code),
+  #         advise exact model + thinking effort from locked inventory, wait for resume word
+  # false = only pause when active model clearly mismatches task complexity
+  always_recommend_before_coding: true
+  recommend_thinking_effort: true
+  auto_resume_triggers:
+    - "gas"
+    - "lanjut"
+    - "lanjutkan"
+    - "lanjutin"
+    - "ubah kode"
+    - "udah diubah"
+    - "sudah diubah"
+    - "sudah diganti"
+    - "udah diganti"
+    - "kerjakan"
+    - "tetap jalan"
+    - "continue"
+    - "proceed"
+    - "go"
+  # Optional manual pre-fill (leave "auto" to populate via first-run screenshot/text onboarding)
+  available_models:
+    light: "auto"
+    balanced: "auto"
+    heavy: "auto"
+  thinking_levels_supported: "auto"   # auto | none | low-high | low-medium-high
+
+# Unified Workflow: Ultra-Lean Brainstorming + Autonomous Execution
+workflow:
+  auto_detect_brainstorming: true
+  brainstorming_read_only: true            # zero code edits & zero unsolicited repo reads during ideation
+  brainstorming_max_lines: 15              # strict telegraphic compression during brainstorming
+  gate_after_brainstorming: true           # always show model+thinking gate before executing brainstormed plan
+  autonomous_until_verified: true          # after "gas", run end-to-end without stopping for routine confirms
+  auto_expand_short_prompts: true          # silently expand brief/casual prompts into full technical specs
+
+# Tier & Thinking-Effort Adaptive Reasoning Boost
+cognitive_boost:
+  enabled: true
+  # auto | light-boost | balanced-sharp | heavy-precision
+  profile: "auto"
+  boost_low_thinking_models: true          # force structured micro-steps on weak or Off/Low-thinking models
+  enforce_mental_dry_run: true
+  enforce_anti_hallucination: true
+  require_hidden_quality_audit: true       # silent self-audit via module 18 before reporting completion
+
+# Speed, Parallelism & Token Economy (Applies to Brainstorming, Web & Pure Coding)
+speed_and_tokens:
+  reasoning_style: "chain-of-draft"        # chain-of-draft | standard
+  response_verbosity: "ultra"              # ultra | concise | detailed
+  parallel_tool_batching: true             # batch independent reads/searches in 1 turn
+  fast_path_surgical_edits: true           # zero planning monologue for trivial edits
+  slice_read_threshold_lines: 200          # files >200 lines must use grep/slice reads
+  context_rot_guard: true                  # strip verbose logs, never re-read known slices, checkpoint early
+  max_optional_ideas: 2                    # 0 = disable optional suggestions
+
+# Consent-Gated Ignore Shield
+ignore_shield:
+  enabled: true
+  require_user_confirmation: true          # agent may inspect ignored paths ONLY after explicit user yes
+  default_ignored_paths:
+    - "node_modules/"
+    - ".git/"
+    - "dist/"
+    - "build/"
+    - ".next/"
+    - ".nuxt/"
+    - "venv/"
+    - ".venv/"
+    - "__pycache__/"
+    - "vendor/"
+    - "target/"
+    - "*.lock"
+    - "package-lock.json"
+    - "yarn.lock"
+    - "pnpm-lock.yaml"
+    - "*.min.js"
+    - "*.min.css"
+    - ".env"
+    - ".env.*"
+
+# Grounded Idea Elevation & Anti-Defect Guards
+idea_elevation:
+  sharpen_rough_ideas: true
+  tag_assumptions: true                    # mark inferred defaults with [ASSUMPTION]
+  strict_scope_fence: true
+  forbid_fake_brand_data: true
+  max_clarifying_questions_high_risk: 2
+
+# Fast Verification Pipeline & Timeouts
+verification:
+  auto_run_checks: true
+  fail_fast: true
+  silent_pass_output: true
+  tier0_timeout_sec: 15                    # static lint/typecheck watchdog
+  tier1_timeout_sec: 15                    # delta test watchdog
+  tier2_timeout_sec: 60                    # full pipeline watchdog
+  max_self_heal_retries: 3
+  root_cause_pause_after_failures: 2       # 3-Strike Circuit Breaker
+  skip_tests_on_docs_only: true
+  check_git_status_above_files: 2
+
+# Living Memory (.ai-memory/)
+memory:
+  memory_dir: ".ai-memory"
+  track_record_append_only: true           # NEVER delete old entries; always append at bottom
+  current_state_max_lines: 30              # compact rolling snapshot read on boot
+  auto_update_codebase_map: true
+  anchor_refresh_interval_turns: 10        # silently re-read CURRENT_STATE + MISTAKES
+  auto_compaction_alert: true
+
+# Anti-AI-Slop Web Craft (Target: <=10% AI feel)
+anti_ai_slop:
+  mode: "full"                             # full | web-ui | copy | code | off
+  max_ai_slop_tolerance: "10%"
+  ban_neon_and_gimmicks: true
+  require_design_contract: true            # lock 15-line design contract before CSS/HTML
+  forbid_placeholder_copy: true            # zero Lorem Ipsum / John Doe / Acme
+  # editorial-craft | warm-minimal | swiss-grid | high-contrast-utility | custom
+  default_ui_vibe: "editorial-craft"
+
+# Pure Coding (Non-Web)
+pure_coding:
+  contract_first: true
+  strict_surgical_edits: true
+  forbid_over_engineering: true
+  enforce_edge_case_guards: true
+
+# Web Live Runner
+web_live_runner:
+  auto_run_dev_server: true
+  server_boot_timeout_sec: 15
+  prefer_browser_visual_check: true
+  check_mobile_viewport: true
+  cleanup_background_server: true
